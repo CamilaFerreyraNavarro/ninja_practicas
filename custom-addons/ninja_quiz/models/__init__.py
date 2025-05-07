@@ -1,0 +1,1 @@
+from . import ninja_survey_quiz

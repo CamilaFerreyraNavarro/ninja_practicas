@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ninja_quiz_tree" model="ir.ui.view">
+        <field name="name">survey.survey.tree.ninja</field>
+        <field name="model">survey.survey</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="title"/>
+                <field name="is_ninja_quiz"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ninja_quiz_form" model="ir.ui.view">
+        <field name="name">survey.survey.form.ninja</field>
+        <field name="model">survey.survey</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="description"/>
+                        <field name="is_ninja_quiz"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ninja_quiz" model="ir.actions.act_window">
+        <field name="name">Ninja Quizzes</field>
+        <field name="res_model">survey.survey</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_ninja_quiz', '=', True)]</field>
+    </record>
+</odoo>
