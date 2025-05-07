@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_ninja_quiz_root"
+    <data>
+            <menuitem id="menu_ninja_quiz_root"
               name="Ninja Quiz"
               sequence="10"
               icon="fa-gamepad"/>
@@ -10,4 +11,5 @@
               parent="menu_ninja_quiz_root"
               action="action_ninja_quiz"
               sequence="20"/>
+    </data>
 </odoo>
