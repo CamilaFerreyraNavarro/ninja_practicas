@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="ninja_quiz_style" inherit_id="survey.survey_session_manage">
+        <xpath expr="//div[contains(@class, 'o_survey_manage_chart')]" position="replace">
+            <div class="ninja-quiz-container">
+                <t t-foreach="question.answer_options" t-as="answer">
+                    <div class="ninja-quiz-option" t-attf-style="background-color: #{['#f44336', '#4caf50', '#2196f3', '#ff9800'][loop.index0 % 4]}">
+                        <t t-esc="answer.value"/>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
+

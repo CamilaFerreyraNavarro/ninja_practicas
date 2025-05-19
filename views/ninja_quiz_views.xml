@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_survey_form_inherit_ninja" model="ir.ui.view">
+        <field name="name">survey.survey.form.inherit.ninja</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='title']" position="after">
+                <field name="kahoot_code"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_survey_question_form_inherit_ninja" model="ir.ui.view">
+        <field name="name">survey.question.form.inherit.ninja</field>
+        <field name="model">survey.question</field>
+        <field name="inherit_id" ref="survey.survey_question_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='title']" position="after">
+                <field name="kahoot_timer"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

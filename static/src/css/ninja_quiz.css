@@ -1,0 +1,22 @@
+.ninja-quiz-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.ninja-quiz-option {
+    flex: 1 1 200px;
+    text-align: center;
+    padding: 40px;
+    font-size: 2rem;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.ninja-quiz-option:hover {
+    transform: scale(1.05);
+}
