@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
     <template id="ninja_quiz_style" inherit_id="survey.survey_session_manage">
         <xpath expr="//div[contains(@class, 'o_survey_manage_chart')]" position="replace">
+            <div id="kahoot-timer" class="kahoot-timer">30</div>
+
             <div class="ninja-quiz-container">
                 <t t-foreach="question.answer_options" t-as="answer">
                     <div class="ninja-quiz-option" t-attf-style="background-color: #{['#f44336', '#4caf50', '#2196f3', '#ff9800'][loop.index0 % 4]}">
@@ -11,5 +14,65 @@
             </div>
         </xpath>
     </template>
-</odoo>
 
+    <!-- Vista de resultados -->
+    <template id="template_results" name="Resultados Podio">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h1 class="text-center">Resultados de <t t-esc="survey_title"/></h1>
+
+                <canvas id="podium" width="600" height="400"></canvas>
+
+                <!-- JSON -->
+                <script type="text/javascript">
+                  const playersData = {
+                    labels: <t t-esc="json.dumps([p.name for p in players])" />,
+                    scores: <t t-esc="json.dumps([p.points for p in players])" />
+                  };
+                </script>
+            </div>
+        </t>
+    </template>
+
+    <template id="template_lobby" name="Lobby de Partida">
+    <t t-call="website.layout">
+        <div class="container mt-5">
+            <h2 class="text-center">Unite a la partida de Ninja Quiz</h2>
+            <form action="/ninja_quiz/join" method="POST" class="mt-4 text-center">
+                <input type="text" name="pin" placeholder="Código Kahoot" required="required" class="form-control mb-3" style="max-width: 300px; margin: 0 auto;"/>
+                <input type="text" name="player_name" placeholder="Tu nombre" required="required" class="form-control mb-3" style="max-width: 300px; margin: 0 auto;"/>
+                <button type="submit" class="btn btn-primary">Unirse</button>
+            </form>
+        </div>
+    </t>
+</template>
+
+<template id="template_wait" name="Sala de espera Ninja Quiz">
+      <t t-call="website.layout">
+        <div class="container text-center mt-5">
+          <h1><t t-esc="survey.title"/></h1>
+
+          <p>Código PIN de la partida:</p>
+          <h2 class="display-4"><t t-esc="survey.kahoot_code"/></h2>
+
+          <p>Envíales este link para unirse:</p>
+          <p>
+            <a t-att-href="base_url + '/ninja_quiz/lobby'"
+               t-esc="base_url + '/ninja_quiz/lobby'"/>
+          </p>
+
+          <p>Jugadores conectados: <strong><t t-esc="players|length"/></strong></p>
+
+          <a t-att-href="\
+             '/survey/start/%s?user_input_id=%s'\
+             % (survey.id,
+                players and players[0].session_id.id or 0)\
+             "
+             class="btn btn-success btn-lg mt-3">
+            Comenzar partida
+          </a>
+        </div>
+      </t>
+    </template>
+
+</odoo>
